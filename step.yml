@@ -1,6 +1,6 @@
-title: "Android info"
+title: "APK info"
 summary: |-
-  Android APK info provider
+  APK Android info provider
 description: |-
   Provides all possible Android APK information as package name, version name or version code.
 website: https://github.com/thefuntasty/bitrise-step-android-info
@@ -9,7 +9,8 @@ support_url: https://github.com/thefuntasty/bitrise-step-android-info/issues
 project_type_tags:
   - "android"
 type_tags:
-  - artifact
+  - android
+  - apk
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
