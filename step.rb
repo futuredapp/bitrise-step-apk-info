@@ -71,7 +71,7 @@ end
 
 def filter_app_icon(infos)
   # application: label='CardsUp' icon='res/mipmap-hdpi-v4/ic_launcher.png'
-  app_icon_regex = 'application: label=\'(?<label>.+)\' icon=\'(?<icon>.+)\''
+  app_icon_regex = 'application: label=\'(?<label>.*)\' icon=\'(?<icon>.*)\''
   app_icon_match = infos.match(app_icon_regex)
 
   return app_icon_match.captures[1]  if app_icon_match && app_icon_match.captures
@@ -115,7 +115,8 @@ def get_android_apk_info(apk_path)
       version_code: version_code,
       version_name: version_name,
       min_sdk_version: min_sdk,
-      icon_path: icon_path
+      icon_path: icon_path,
+      icon_apk_path: icon_apk_path
     }
   }
 
