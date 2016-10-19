@@ -1,1 +1,1 @@
-# bitrise-step-android-info
+# bitrise-step-apk-info
