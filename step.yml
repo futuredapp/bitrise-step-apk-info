@@ -1,0 +1,68 @@
+title: "Android info"
+summary: |-
+  Android APK info provider
+description: |-
+  Generic artifacts deployer, attaches the artifacts to bitrise.io builds.
+
+  You'll see the deployed files on bitrise.io, on the build's page,
+  in the "Apps and Artifacts" section.
+website: https://github.com/thefuntasty/bitrise-step-android-info
+source_code_url: https://github.com/thefuntasty/bitrise-step-android-info
+support_url: https://github.com/thefuntasty/bitrise-step-android-info/issues
+host_os_tags:
+  - "osx-10.10"
+project_type_tags: []
+type_tags:
+  - artifact
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: .IsCI
+inputs:
+  - deploy_path: "$BITRISE_DEPLOY_DIR"
+    opts:
+      title: "Deploy directory or file path"
+      description: |
+        Specify the directory or file path which will be deployed.
+        If the specified path is a directory then every file
+        in the directory will be deployed - but only the
+        files in the specified directory, sub-directories
+        won't be uploaded. For uploading the directory's content
+        recursively you should use the *Compress* option
+        which will compress the whole directory, with
+        every sub-directory included.
+
+        If you specify a file path then only the specified
+        file will be deployed.
+      is_required: true
+outputs:
+  - ANDROID_APP_PACKAGE_NAME:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
+  - ANDROID_APK_FILE_SIZE:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
+  - ANDROID_APP_NAME:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
+  - ANDROID_APP_VERSION_NAME:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
+  - ANDROID_APP_VERSION_CODE:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
+  - ANDROID_ICON_PATH:
+    opts:
+      title: Android package name
+      description: |-
+        Android package name, ex. com.package.my
