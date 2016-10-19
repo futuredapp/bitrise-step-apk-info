@@ -14,4 +14,4 @@ bundle install --without test --jobs 20 --retry 5
 echo
 echo "=> Running the step ..."
 echo
-bundle exec ruby "$THIS_SCRIPT_DIR/step.rb" -d "${deploy_path}"
+bundle exec ruby "$THIS_SCRIPT_DIR/step.rb" -a "${apk_path}"

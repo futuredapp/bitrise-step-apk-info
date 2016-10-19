@@ -1,5 +1,4 @@
 require 'optparse'
-require 'tempfile'
 
 # -----------------------
 # --- functions
@@ -92,11 +91,7 @@ end
 
 def get_android_apk_info(apk_path)
   puts
-  puts
-  puts "# Deploying apk file: #{apk_path}"
-
-  # - Analyze the apk / collect infos from apk
-  puts '--> Analyze the apk'
+  puts "# APK file: #{apk_path}"
 
   aapt = aapt_path
   infos = `#{aapt} dump badging #{apk_path}`
@@ -112,7 +107,6 @@ def get_android_apk_info(apk_path)
 
   icon_path = File.dirname(apk_path) + "/icon.png"
 
-
   apk_info_hsh = {
     file_size_bytes: apk_file_size,
     app_info: {
@@ -125,8 +119,6 @@ def get_android_apk_info(apk_path)
     }
   }
 
-
-
   puts "#{apk_info_hsh}"
 
   return apk_info_hsh
@@ -136,66 +128,37 @@ end
 # --- Options
 
 options = {
-  deploy_path: nil,
+  apk_path: nil,
 }
 
 parser = OptionParser.new do|opts|
   opts.banner = 'Usage: step.rb [options]'
-  opts.on('-d', '--deploypath PATH', 'Deploy Path') { |d| options[:deploy_path] = d unless d.to_s == '' }
+  opts.on('-a', '--apkpath PATH', 'APK Path') { |d| options[:apk_path] = d unless d.to_s == '' }
   opts.on('-h', '--help', 'Displays Help') do
     exit
   end
 end
 parser.parse!
 
-fail_with_message('No deploy_path provided') unless options[:deploy_path]
+fail_with_message('No apk_path provided') unless options[:apk_path]
 
-options[:deploy_path] = File.absolute_path(options[:deploy_path])
+options[:apk_path] = File.absolute_path(options[:apk_path])
 
-if !Dir.exist?(options[:deploy_path]) && !File.exist?(options[:deploy_path])
-  fail_with_message('Deploy source path does not exist at the provided path: ' + options[:deploy_path])
+if !Dir.exist?(options[:apk_path]) && !File.exist?(options[:apk_path])
+  fail_with_message('APK path does not exist: ' + options[:apk_path])
 end
 
 puts
 puts '========== Configs =========='
-puts " * deploy_path: #{options[:deploy_path]}"
+puts " * apk_path: #{options[:apk_path]}"
 
 # ----------------------------
 # --- Main
 
 begin
   apk_info_hsh = ""
-  if File.directory?(options[:deploy_path])
-      puts
-      puts '## Uploading the content of the Deploy directory separately'
-      entries = Dir.entries(options[:deploy_path])
-      entries.delete('.')
-      entries.delete('..')
-
-      entries = entries
-        .map { |e| File.join(options[:deploy_path], e) }
-        .select { |e| !File.directory?(e) }
-
-      puts
-      puts '======= List of files ======='
-      puts ' No files found to deploy' if entries.length == 0
-      entries.each { |filepth| puts " * #{filepth}" }
-      puts '============================='
-      puts
-
-      entries.each do |filepth|
-        disk_file_path = filepth
-
-        if disk_file_path.match('.*.apk')
-          apk_info_hsh = get_android_apk_info(disk_file_path)
-        end
-      end
-  else
-    puts
-    puts '## Deploying single file'
-    if options[:deploy_path].match('.*.apk')
-      apk_info_hsh = get_android_apk_info(options[:deploy_path])
-    end
+  if options[:apk_path].match('.*.apk')
+    apk_info_hsh = get_android_apk_info(options[:apk_path])
   end
 
   # - Success
