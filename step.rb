@@ -74,7 +74,13 @@ def filter_app_icon(infos)
   app_icon_regex = 'application: label=\'(?<label>.*)\' icon=\'(?<icon>.*)\''
   app_icon_match = infos.match(app_icon_regex)
 
-  return app_icon_match.captures[1]  if app_icon_match && app_icon_match.captures
+  # return app_icon_match.captures[1]  if app_icon_match && app_icon_match.captures
+
+  # application-icon-65535:'res/mipmap-xxxhdpi-v4/ic_launcher.png'
+  app_icon_regex = 'application-icon-[0-9]+:\'(?<icon>.*)\''
+  app_icon_match = infos.match(app_icon_regex)
+
+  return app_icon_match.captures[0]  if app_icon_match && app_icon_match.captures
 
   return ''
 end
@@ -89,10 +95,19 @@ def filter_min_sdk_version(infos)
   return min_sdk
 end
 
-def get_android_apk_info(apk_path)
-  puts
-  puts "# APK file: #{apk_path}"
+def unzip_icon(apk_path, icon_apk_path)
+  icon_path = ''
 
+  if icon_apk_path
+    `unzip -p #{apk_path} #{icon_apk_path} > #{File.dirname(apk_path)}/icon.png`
+
+    icon_path = File.dirname(apk_path) + "/icon.png"
+  end
+
+  return icon_path
+end
+
+def get_android_apk_info(apk_path)
   aapt = aapt_path
   infos = `#{aapt} dump badging #{apk_path}`
 
@@ -100,12 +115,8 @@ def get_android_apk_info(apk_path)
   app_name = filter_app_label(infos)
   min_sdk = filter_min_sdk_version(infos)
   icon_apk_path = filter_app_icon(infos)
-
   apk_file_size = File.size(apk_path)
-
-  `unzip -p #{apk_path} #{icon_apk_path} > #{File.dirname(apk_path)}/icon.png`
-
-  icon_path = File.dirname(apk_path) + "/icon.png"
+  icon_path = unzip_icon(apk_path, icon_apk_path)
 
   apk_info_hsh = {
     file_size_bytes: apk_file_size,
@@ -120,7 +131,7 @@ def get_android_apk_info(apk_path)
     }
   }
 
-  puts "#{apk_info_hsh}"
+  puts "=> APK Info: #{apk_info_hsh}"
 
   return apk_info_hsh
 end
@@ -149,9 +160,7 @@ if !Dir.exist?(options[:apk_path]) && !File.exist?(options[:apk_path])
   fail_with_message('APK path does not exist: ' + options[:apk_path])
 end
 
-puts
-puts '========== Configs =========='
-puts " * apk_path: #{options[:apk_path]}"
+puts "=> APK path: #{options[:apk_path]}"
 
 # ----------------------------
 # --- Main
