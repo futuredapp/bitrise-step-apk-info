@@ -70,14 +70,13 @@ def filter_app_label(infos)
 end
 
 def filter_app_icon(infos)
+  # application-icon-65535:'res/mipmap-xxxhdpi-v4/ic_launcher.png'
+  app_icon_match = infos.scan(/application-icon-[0-9]+:\'(.*)\'/)
+
+  return app_icon_match[-1][0] if app_icon_match
+
   # application: label='CardsUp' icon='res/mipmap-hdpi-v4/ic_launcher.png'
   app_icon_regex = 'application: label=\'(?<label>.*)\' icon=\'(?<icon>.*)\''
-  app_icon_match = infos.match(app_icon_regex)
-
-  # return app_icon_match.captures[1]  if app_icon_match && app_icon_match.captures
-
-  # application-icon-65535:'res/mipmap-xxxhdpi-v4/ic_launcher.png'
-  app_icon_regex = 'application-icon-[0-9]+:\'(?<icon>.*)\''
   app_icon_match = infos.match(app_icon_regex)
 
   return app_icon_match.captures[0]  if app_icon_match && app_icon_match.captures
