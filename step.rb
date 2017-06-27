@@ -179,12 +179,12 @@ begin
   end
 
   # - Success
-  fail 'Failed to export ANDROID_APK_FILE_SIZE' unless system("envman add --key ANDROID_APK_FILE_SIZE --value '#{apk_info_hsh[:file_size_bytes]}'")
-  fail 'Failed to export ANDROID_APP_NAME' unless system("envman add --key ANDROID_APP_NAME --value '#{apk_info_hsh[:app_info][:app_name]}'")
-  fail 'Failed to export ANDROID_APP_PACKAGE_NAME' unless system("envman add --key ANDROID_APP_PACKAGE_NAME --value '#{apk_info_hsh[:app_info][:package_name]}'")
-  fail 'Failed to export ANDROID_APP_VERSION_NAME' unless system("envman add --key ANDROID_APP_VERSION_NAME --value '#{apk_info_hsh[:app_info][:version_name]}'")
-  fail 'Failed to export ANDROID_APP_VERSION_CODE' unless system("envman add --key ANDROID_APP_VERSION_CODE --value '#{apk_info_hsh[:app_info][:version_code]}'")
-  fail 'Failed to export ANDROID_ICON_PATH' unless system("envman add --key ANDROID_ICON_PATH --value '#{apk_info_hsh[:app_info][:icon_path]}'")
+  fail 'Failed to export ANDROID_APK_FILE_SIZE' unless system("envman", "add", "--key", "ANDROID_APK_FILE_SIZE", "--value", (apk_info_hsh[:file_size_bytes]).to_s)
+  fail 'Failed to export ANDROID_APP_NAME' unless system("envman", "add", "--key", "ANDROID_APP_NAME", "--value", apk_info_hsh[:app_info][:app_name])
+  fail 'Failed to export ANDROID_APP_PACKAGE_NAME' unless system("envman", "add", "--key", "ANDROID_APP_PACKAGE_NAME", "--value", apk_info_hsh[:app_info][:package_name])
+  fail 'Failed to export ANDROID_APP_VERSION_NAME' unless system("envman", "add", "--key", "ANDROID_APP_VERSION_NAME", "--value", apk_info_hsh[:app_info][:version_name])
+  fail 'Failed to export ANDROID_APP_VERSION_CODE' unless system("envman", "add", "--key", "ANDROID_APP_VERSION_CODE", "--value", apk_info_hsh[:app_info][:version_code])
+  fail 'Failed to export ANDROID_ICON_PATH' unless system("envman", "add", "--key", "ANDROID_ICON_PATH", "--value", apk_info_hsh[:app_info][:icon_path])
 rescue => ex
   fail_with_message(ex)
 end
