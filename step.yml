@@ -7,10 +7,9 @@ website: https://github.com/thefuntasty/bitrise-step-apk-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-apk-info
 support_url: https://github.com/thefuntasty/bitrise-step-apk-info/issues
 project_type_tags:
-  - "android"
-type_tags:
   - android
-  - apk
+type_tags:
+  - utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
