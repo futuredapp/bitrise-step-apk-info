@@ -7,13 +7,13 @@ website: https://github.com/thefuntasty/bitrise-step-apk-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-apk-info
 support_url: https://github.com/thefuntasty/bitrise-step-apk-info/issues
 project_type_tags:
-  - android
-  - xamarin
-  - cordova
-  - ionic
-  - react-native
+  - "android"
+  - "xamarin"
+  - "cordova"
+  - "ionic"
+  - "react-native"
 type_tags:
-  - utility
+  - artifact-info
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
