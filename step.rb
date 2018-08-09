@@ -41,7 +41,9 @@ def filter_package_infos(infos)
   version_code = ''
   version_name = ''
 
-  package_name_version_regex = 'package: name=\'(?<package_name>.*)\' versionCode=\'(?<version_code>.*)\' versionName=\'(?<version_name>.*)\' platformBuildVersionName='
+  # build tools version >= 28 aapt output: package: name='sample.results.test.multiple.bitrise.com.multipletestresultssample' versionCode='1' versionName='1.0'
+	# build tools version < 28 aapt output: package: name='sample.results.test.multiple.bitrise.com.multipletestresultssample' versionCode='1' versionName='1.0' platformBuildVersionName=''
+  package_name_version_regex = 'package: name=\'(?<package_name>.*)\' versionCode=\'(?<version_code>.*)\' versionName=\'(?<version_name>.*)\''
   package_name_version_match = infos.match(package_name_version_regex)
 
   if package_name_version_match && package_name_version_match.captures
