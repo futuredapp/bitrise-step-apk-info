@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1 (22 Aug 2018)
+
+* Update aapt output regex
+
 ## 1.4.0 (3 Feb 2018)
 
 * support adaptive icons

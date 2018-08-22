@@ -6,7 +6,7 @@ app:
   # define these in your .bitrise.secrets.yml
   - BITRISE_APK_PATH: $BITRISE_APK_PATH
   #
-  - STEP_VERSION: "1.4.0"
+  - STEP_VERSION: "1.4.1"
 
 workflows:
   # ----------------------------------------------------------------
