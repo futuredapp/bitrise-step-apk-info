@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.3 (15 Apr 2019)
+
+* Fix invalid aapt log regex parser
+
 ## 1.4.2 (12 Sep 2018)
 
 * Fix invalid apk regex parser
