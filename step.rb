@@ -37,22 +37,23 @@ def aapt_path
 end
 
 def filter_package_infos(infos)
-  package_name = ''
-  version_code = ''
-  version_name = ''
-
-  # build tools version >= 28 aapt output: package: name='sample.results.test.multiple.bitrise.com.multipletestresultssample' versionCode='1' versionName='1.0'
-	# build tools version < 28 aapt output: package: name='sample.results.test.multiple.bitrise.com.multipletestresultssample' versionCode='1' versionName='1.0' platformBuildVersionName=''
-  package_name_version_regex = 'package: name=\'(?<package_name>.*)\' versionCode=\'(?<version_code>.*)\' versionName=\'(?<version_name>.*)\''
-  package_name_version_match = infos.match(package_name_version_regex)
-
-  if package_name_version_match && package_name_version_match.captures
-    package_name = package_name_version_match.captures[0]
-    version_code = package_name_version_match.captures[1]
-    version_name = package_name_version_match.captures[2]
-  end
+  package_name = parseField(infos, "name")
+  version_code = parseField(infos, "versionCode")
+  version_name = parseField(infos, "versionName")
 
   return package_name, version_code, version_name
+end
+
+def parseField(infos, fieldName)
+  regex = '%s=\'(?<matched_string>\S*)\'' % fieldName
+  matches = infos.match(regex)
+
+  if matches && matches.captures
+    return matches.captures[0]
+  else
+    return ''
+  end
+
 end
 
 def filter_app_label(infos)

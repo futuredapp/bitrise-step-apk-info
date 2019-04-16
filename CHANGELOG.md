@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.4 (15 Apr 2019)
+
+* Fix too hungry regex matcher
+
 ## 1.4.3 (15 Apr 2019)
 
 * Fix invalid aapt log regex parser
