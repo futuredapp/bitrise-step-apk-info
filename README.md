@@ -2,11 +2,11 @@
 
 # Bitrise Step - APK Info
 
-Bitrise step what produces metadata to given APK file.
+Bitrise step that produces metadata to given APK file.
 
 ## Usage
 
-Add this step through standard Workflow Editor and provide required input environment variables.
+Add this step using standard Workflow Editor and provide required input environment variables.
 
 ### Input
 
