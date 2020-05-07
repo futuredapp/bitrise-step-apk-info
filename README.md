@@ -1,4 +1,4 @@
-![bitrise-step-apk-info](imgs/logo.svg)
+<img align="right" src="imgs/logo.svg">
 
 # Bitrise Step - APK Info
 
