@@ -88,13 +88,13 @@ def filter_app_icon(infos, apk_path)
 
   # application-icon-65534:'res/mipmap-anydpi-v26/ic_launcher.xml'
   app_icon_match = infos.scan(/application-icon-[0-9]+:\'.*\/(.*).xml\'/)
-  return `#{aapt_path} l #{apk_path} | grep #{app_icon_match[0][0]}.png | tail -1`.strip if app_icon_match
+  return `#{aapt_path} l #{apk_path} | grep #{app_icon_match[0][0]}.png | tail -1`.strip if app_icon_match && app_icon_match[0]
 
   # application: label='CardsUp' icon='res/mipmap-hdpi-v4/ic_launcher.png'
   app_icon_regex = 'application: label=\'(?<label>.*)\' icon=\'(?<icon>.*)\''
   app_icon_match = infos.match(app_icon_regex)
 
-  return app_icon_match.captures[0]  if app_icon_match && app_icon_match.captures
+  return app_icon_match.captures[1]  if app_icon_match && app_icon_match.captures
 
   return ''
 end
