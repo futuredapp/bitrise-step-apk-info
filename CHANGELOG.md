@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.7 (22 Nov 2025)
+
+* Fix bundler setup
+
 ## 1.4.4 (15 Apr 2019)
 
 * Fix too hungry regex matcher
