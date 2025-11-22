@@ -7,6 +7,7 @@ set -e
 export BUNDLE_GEMFILE="$THIS_SCRIPT_DIR/Gemfile"
 
 bundle update --bundler
-bundle install --without test --jobs 20 --retry 5
+bundle config set --local without "test"
+bundle install --jobs 20 --retry 5
 
 bundle exec ruby "$THIS_SCRIPT_DIR/step.rb" -a "${apk_path}"
